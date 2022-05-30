@@ -25,7 +25,7 @@ BACKUP_PATH="o2switch-backup"
 BACKUP_O2S_DATABASE_PREFIXE="nickxxx_"
 
 # Define list of directories you dont want to backup separate with space
-EXCLUDE_DIR="etc logs mail tmp $BACKUP_PATH"
+EXCLUDE_DIR="etc logs ssl mail tmp $BACKUP_PATH"
 # INCLUDE_DIR="directory1"
 
 ### remote server
@@ -39,7 +39,7 @@ SERVER_DIR="/home/xxx/backups/o2switch/"
 MYSQL_USER="backup_user"
 MYSQL_PWD="backup_user_pwd"
 ### don't modify this commande
-if [ -z $MYSQL_USER ] then
+if [ -z $MYSQL_USER ]; then
   MYSQL_DATABASES=`mysql --user=$MYSQL_USER --password=$MYSQL_PWD -e "SHOW DATABASES;" | tr -d "| " | grep -v Database` 
 fi
 
@@ -93,7 +93,7 @@ for i in $(ls -d */)
 done
 
 # FETCH, DUMP AND GZIP DATABASES
-if [ -z $MYSQL_DATABASES ] then
+if [ -z $MYSQL_DATABASES ]; then
   for DATABASE in $MYSQL_DATABASES; do
       if [[ "$DATABASE" != "information_schema" ]] && [[ "$DATABASE" != _* ]] ; then
 
