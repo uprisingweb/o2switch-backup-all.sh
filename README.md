@@ -57,6 +57,16 @@ Ex :
 - 2022-01-01_00-00-00-Database-MyBlog
 
 
+# remote-delete-7days-backups.sh
+This script can be used on you remote server to delete 7 days old backup files
+
+## Usage
+You need to change the backup directory in the script "remote-delete-7days-backups.sh"
+
+You have to create a cron task to call this script every days
+
+`0 0 * * * root /pathtoscript/remote-delete-7days-backups.sh >/dev/null 2>&1`
+
 
 
 
