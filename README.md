@@ -28,7 +28,7 @@ All local files are deleted after being sent to remote server
 Then if database is named 'username_databasename', the dumped file will be name 'databasename'
 
 ## Define list of directories you dont want to backup
-EXCLUDE_DIR="0-htpasswd etc logs mail xxx $BACKUP_PATH"
+EXCLUDE_DIR="etc ssl logs mail xxx $BACKUP_PATH"
 
 Keep $BACKUP_PATH in the list to note backup the backup directory set in $BACKUP_PATH
 
