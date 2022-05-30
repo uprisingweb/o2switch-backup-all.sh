@@ -1,5 +1,5 @@
 # o2switch-backup-all.sh
-Backup all directories and databases from o2switch to a remote server
+Backup all directories (you can set exceptions) and databases from o2switch to a remote server
 
 # Configure SSH connection to your remote server
 **o2switch only works with port 22**
