@@ -75,7 +75,7 @@ for i in $(ls -d */)
     ARCHIVE_FILE="${BACKUP_SUFFIXE_DATE}-${BACKUP_PREFIXE_DIRECTORY}-${i%%/}.tar.gz"
     tar -czf $BACKUP_PATH/$ARCHIVE_FILE ${i%%/}
    
-
+    # Wordpress
     if test -f "${i%%/}/wp-config.php"; then
 
       DATABASE=`cat ${i%%/}/wp-config.php | grep DB_NAME | cut -d \' -f 4`
@@ -84,7 +84,35 @@ for i in $(ls -d */)
       
       DUMP_FILE="${BACKUP_SUFFIXE_DATE}-${BACKUP_PREFIXE_DB}-${DATABASE/$BACKUP_O2S_DATABASE_PREFIXE}.sql"
 
-      echo "Backup WP Database: ${DATABASE}"
+      echo "Backup Wordpress Database: ${DATABASE}"
+      mysqldump --force --opt --routines --user=$WP_DB_USER --password=$WP_DB_PWD --databases $DATABASE > $BACKUP_PATH/$DUMP_FILE
+      gzip $BACKUP_PATH/$DUMP_FILE
+
+    fi
+    # Dolibarr
+    if test -f "${i%%/}/htdocs/conf/conf.php"; then
+
+      DATABASE=`cat ${i%%/}/htdocs/conf/conf.php | grep dolibarr_main_db_name | cut -d \' -f 2`
+      WP_DB_USER=`cat ${i%%/}/htdocs/conf/conf.php | grep dolibarr_main_db_user | cut -d \' -f 2`
+      WP_DB_PWD=`cat ${i%%/}/htdocs/conf/conf.php | grep dolibarr_main_db_pass | cut -d \' -f 2`
+      
+      DUMP_FILE="${BACKUP_SUFFIXE_DATE}-${BACKUP_PREFIXE_DB}-${DATABASE/$BACKUP_O2S_DATABASE_PREFIXE}.sql"
+
+      echo "Backup Dolibarr Database: ${DATABASE}"
+      mysqldump --force --opt --routines --user=$WP_DB_USER --password=$WP_DB_PWD --databases $DATABASE > $BACKUP_PATH/$DUMP_FILE
+      gzip $BACKUP_PATH/$DUMP_FILE
+
+    fi
+    # Prestashop
+    if test -f "${i%%/}/app/config/parameters.php"; then
+
+      DATABASE=`cat ${i%%/}/app/config/parameters.php | grep database_name | cut -d \' -f 4`
+      WP_DB_USER=`cat ${i%%/}/app/config/parameters.php | grep database_user | cut -d \' -f 4`
+      WP_DB_PWD=`cat ${i%%/}/app/config/parameters.php | grep database_password | cut -d \' -f 4`
+      
+      DUMP_FILE="${BACKUP_SUFFIXE_DATE}-${BACKUP_PREFIXE_DB}-${DATABASE/$BACKUP_O2S_DATABASE_PREFIXE}.sql"
+
+      echo "Backup Prestashop Database: ${DATABASE}"
       mysqldump --force --opt --routines --user=$WP_DB_USER --password=$WP_DB_PWD --databases $DATABASE > $BACKUP_PATH/$DUMP_FILE
       gzip $BACKUP_PATH/$DUMP_FILE
 
