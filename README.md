@@ -40,7 +40,7 @@ SERVER_DIR="/home/xxx/backupdirectory/"
 ## local Databases
 The script will back up every database when a directory contains a  wordpress instance
 
-For others type of website you need to create a database user named "backup" and give the SELECT / LOCK TABLES / SHOW VIEW right for each databases you need to back up (except wordpress databases)
+For others type of website you need to create a database user named "backup" and give the SELECT / LOCK TABLES / SHOW VIEW right for each databases you need to back up (except wordpress, prestashop and dolibarr databases which auto-detected)
 
 Set user in `MYSQL_USER="xxxx"`
 Set the password in `MYSQL_PWD="xxxx"`
