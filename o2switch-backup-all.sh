@@ -21,17 +21,19 @@
 ### local backup directory on o2switch
 ### > create a specific directory via o2swtich FTP
 BACKUP_PATH="o2switch-backup"
+# Your O2Switch Nick
+BACKUP_O2S_USER="nickxxx"
 # database prefix, will be removed from dump archive filename for a better backup files ordering
-BACKUP_O2S_DATABASE_PREFIXE="nickxxx_"
+BACKUP_O2S_DATABASE_PREFIXE=$BACKUP_O2S_USER"_"
 
 # Define list of directories you dont want to backup separate with space
-EXCLUDE_DIR="etc logs ssl mail tmp $BACKUP_PATH"
+EXCLUDE_DIR="etc logs ssl mail tmp "$BACKUP_PATH
 # INCLUDE_DIR="directory1"
 
 ### remote server
 SERVER_USER="myuser"
 SERVER_HOST="hostbackup.com"
-SERVER_DIR="/home/xxx/backups/o2switch/"
+SERVER_DIR="/home/xxx/backups/o2switch/"$BACKUP_O2S_USER
 
 ### local Databases
 ### All wordpress Databases will be automatically backed up
