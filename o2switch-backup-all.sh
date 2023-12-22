@@ -40,8 +40,9 @@ SERVER_DIR="/home/xxx/backups/o2switch/"$BACKUP_O2S_USER
 ### If you need to back up others databases, create a database user named "backup" and give the SELECT / LOCK TABLES / SHOW VIEW right for each databases you need to back up (except wordpress databases)
 MYSQL_USER="backup_user"
 MYSQL_PWD="backup_user_pwd"
+MYSQL_DATABASES= ""
 ### don't modify this commande
-if [ -z $MYSQL_USER ]; then
+if [ -n $MYSQL_USER ]; then
   MYSQL_DATABASES=`mysql --user=$MYSQL_USER --password=$MYSQL_PWD -e "SHOW DATABASES;" | tr -d "| " | grep -v Database` 
 fi
 
@@ -123,7 +124,7 @@ for i in $(ls -d */)
 done
 
 # FETCH, DUMP AND GZIP DATABASES
-if [ -z $MYSQL_DATABASES ]; then
+#if [ -z $MYSQL_DATABASES ]; then
   for DATABASE in $MYSQL_DATABASES; do
       if [[ "$DATABASE" != "information_schema" ]] && [[ "$DATABASE" != _* ]] ; then
 
@@ -135,7 +136,7 @@ if [ -z $MYSQL_DATABASES ]; then
 
       fi
   done
-fi
+#fi
 
 
 # RSYNC LOCAL BACKUP TO REMOTE SERVER
