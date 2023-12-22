@@ -22,8 +22,8 @@ modify this line with you directory name : `BACKUP_PATH="o2switch-backup"`
 
 All local files are deleted after being sent to remote server
 
-## Database prefixe is your o2switch username followed by "_"
-`BACKUP_O2S_DATABASE_PREFIXE="username_"`
+## Database prefixe is your o2switch username
+`BACKUP_O2S_DATABASE_PREFIXE="username"`
 
 Then if database is named 'username_databasename', the dumped file will be name 'databasename'
 
